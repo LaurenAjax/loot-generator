@@ -9,46 +9,86 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Generates an encounter and their loot drops
+ * 
+ * @author ajaxlaur
+ */
 public class LootGenerator {
     /** The path to the dataset (either the small or large set). */
     private static final String DATA_SET = "data/large";
     
+    /**
+     * The class that contains the monster
+     */
     public static class Monster {
         
         public final String name;
         
-        public Monster (String monsterName) {
+        /**
+         * Creates a new monster
+         * 
+         * @param monsterName the monster's name
+         */
+        public Monster(String monsterName) {
             name = monsterName;
         }
     }
     
+    /**
+     * The class that contains the treasure class
+     */
     public static class TreasureClass {
         
         public final String treasure;
         
-        public TreasureClass (String loot) {
+        /**
+         * Creates a new treasure class
+         * 
+         * @param loot the category of loot
+         */
+        public TreasureClass(String loot) {
             treasure = loot;
         }
     }
     
+    /**
+     * The class that contains the base item
+     */
     public static class BaseItem {
         
         public final String item;
         
-        public BaseItem (String armor) {
+        /**
+         * Creates a new base item
+         * 
+         * @param armor the armor dropped
+         */
+        public BaseItem(String armor) {
             item = armor;
         }
     }
     
+    /**
+     * The class that contains the base stats
+     */
     public static class BaseStats {
         
         public final String defense;
         
-        public BaseStats (int ac) {
+        /**
+         * Creates the base stats
+         * 
+         * @param ac the armor's armor class
+         */
+        public BaseStats(int ac) {
             defense = "Defense: " + ac;
         }
     }
     
+    /**
+     * The class that contains the affixes
+     */
     public static class Affixes {
         
         public final String prefix;
@@ -56,7 +96,15 @@ public class LootGenerator {
         public final String prefixMod;
         public final String suffixMod;
         
-        public Affixes (String pre, String post, String preMod, String postMod) {
+        /**
+         * Creates the affixes
+         * 
+         * @param pre the prefix
+         * @param post the suffix
+         * @param preMod the prefix's additional effect
+         * @param postMod the suffix's additional effect
+         */
+        public Affixes(String pre, String post, String preMod, String postMod) {
             prefix = pre;
             suffix = post;
             prefixMod = preMod;
@@ -112,7 +160,8 @@ public class LootGenerator {
      * classes is not found
      * @throws IOException if the line in the file cannot be read
      */
-    public static TreasureClass fetchTreasureClass(Monster monster) throws FileNotFoundException, IOException {
+    public static TreasureClass fetchTreasureClass(Monster monster) 
+            throws FileNotFoundException, IOException {
         String file = DATA_SET + "/monstats.txt";
         BufferedReader buffer = new BufferedReader(new FileReader(file));
         String line = buffer.readLine();
@@ -180,7 +229,8 @@ public class LootGenerator {
      * cannot be read
      * @throws IOException if the line in the file cannot be read
      */
-    public static BaseStats generateBaseStats(BaseItem item) throws FileNotFoundException, IOException {
+    public static BaseStats generateBaseStats(BaseItem item) 
+            throws FileNotFoundException, IOException {
         String file = DATA_SET + "/armor.txt";
         BufferedReader buffer = new BufferedReader(new FileReader(file));
         String line = buffer.readLine();
